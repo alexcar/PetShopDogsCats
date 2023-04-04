@@ -18,6 +18,8 @@ namespace Infrastructure.Mappings
             builder.Property(x => x.Cnpj).IsRequired().HasMaxLength(14);
             builder.Property(x => x.Phone).HasMaxLength(11);
             builder.Property(x => x.CellPhone).HasMaxLength(12);
+            builder.Property(x => x.Active).IsRequired().HasDefaultValueSql("1");
+            builder.Property(x => x.CreatedDate).IsRequired().HasDefaultValueSql("getdate()");
         }
     }
 }
