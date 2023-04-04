@@ -28,5 +28,6 @@ namespace Infrastructure
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<WorkShift> WorkShifts { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
     }
 }

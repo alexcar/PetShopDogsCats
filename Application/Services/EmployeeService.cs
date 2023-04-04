@@ -64,7 +64,7 @@ namespace Application.Services
         public async Task<List<EmployeeListResponse>?> GetByTermAsync(string term)
         {
             var response = await _context.Employees
-                .Where(x => x.Name.Contains(term) || x.Cpf == term)
+                .Where(x => (x.Name.Contains(term) || x.Cpf == term) && x.Active == true)
                 .Select(p => new EmployeeListResponse(
                     p.Id, p.Name, p.Cpf, p.CellPhone, p.IsVeterinarian)).AsNoTracking().ToListAsync();
 
@@ -205,7 +205,7 @@ namespace Application.Services
 
         public async Task DeleteAsync(Guid id)
         {
-            var employee = await _context.Employees!.FirstOrDefaultAsync(x => x.Id == id);
+            var employee = await _context.Employees.FirstOrDefaultAsync(x => x.Id == id);
 
             if (employee is null)
                 throw new EmployeeNotFoundException(entityName, id);
@@ -218,17 +218,17 @@ namespace Application.Services
 
         private async Task<bool> CpfAlreadyRegisterd(string cpf)
         {
-            return await _context.Employees!.Where(x => x.Cpf == cpf).AnyAsync();
+            return await _context.Employees.Where(x => x.Cpf == cpf).AnyAsync();
         }
 
         private async Task<bool> EmailAlreadyRegistered(string email)
         {
-            return await _context.Employees!.Where(x => x.Email == email).AnyAsync();
+            return await _context.Employees.Where(x => x.Email == email).AnyAsync();
         }
 
         private async Task<bool> NewEmailAlreadyExists(Guid id, string email)
         {
-            return await _context.Employees!.Where(x => x.Id != id && x.Email == email).AnyAsync();
+            return await _context.Employees.Where(x => x.Id != id && x.Email == email).AnyAsync();
         }        
 
         private Task<WorkShift> AddWorkShift(CreateWorkShiftRequest workShiftRequest) 

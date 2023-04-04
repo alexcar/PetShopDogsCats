@@ -16,12 +16,12 @@ namespace PetShopDogsCats.API.Validators
             
             RuleFor(model => model.Rg).NotEmpty()
                 .WithMessage("O RG do empregado é obrigatório");
-            
-            RuleFor(model => model.Email).NotEmpty()
-                .WithMessage("O email do empregado é obrigatório");
-            RuleFor(model => model.Email).EmailAddress()
-                .WithMessage("O email informado não tem um formato válido");            
-            
+
+            RuleFor(model => model.Email)
+                .NotEmpty().WithMessage("O email do empregado é obrigatório")
+                .MaximumLength(100).WithMessage("O email não pode ultrapassar a 100 caracteres")
+                .EmailAddress().WithMessage("O email informado não tem um formato válido");
+
             RuleFor(model => model.CellPhone).NotEmpty()
                 .WithMessage("O celular do empregado é obrigatório");
             
