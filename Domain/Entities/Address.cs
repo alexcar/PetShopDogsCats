@@ -28,6 +28,6 @@
         public string State { get; set; }
         public string Country { get; set; }        
 
-        public ICollection<Employee> Employees { get; set; } = new List<Employee>();
+        public IEnumerable<Employee> Employees { get; set; } = new List<Employee>();
     }
 }

@@ -2,11 +2,7 @@
 {
     public class Category : BaseEntity
     {
-        public Category(string? name)
-        {
-            Name = name;
-        }
-
-        public string? Name { get; set; }
+        public string Name { get; set; }
+        IEnumerable<Product> Products { get; set; }
     }
 }

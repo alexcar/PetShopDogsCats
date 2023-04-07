@@ -35,7 +35,7 @@ namespace Application.Services
                 .AsNoTracking().FirstOrDefaultAsync();
 
             if (supplier == null)
-                throw new EntityNotFoundException($"O fornecedor com o {id} não existe.");
+                throw new EntityNotFoundException($"O fornecedor com o ID: {id} não existe.");
 
             var response = new SupplierResponse(
                 supplier.Id, supplier.Name, supplier.Trade, supplier.Contact, supplier.Email, supplier.Cnpj,
@@ -94,7 +94,7 @@ namespace Application.Services
                 .Where(x => x.Id == request.Id).FirstOrDefaultAsync();
 
             if (supplier is null)
-                throw new EntityNotFoundException($"O fornecedor com o {request.Id} não existe.");
+                throw new EntityNotFoundException($"O fornecedor com o ID: {request.Id} não existe.");
 
             if (supplier.Cnpj.Trim() != request.Cnpj.Trim())
             {
@@ -138,7 +138,7 @@ namespace Application.Services
             var supplier = await _context.Suppliers.FirstOrDefaultAsync(x => x.Id == id);
 
             if (supplier is null)
-                throw new EntityNotFoundException($"O fornecedor com o {id} não existe.");
+                throw new EntityNotFoundException($"O fornecedor com o ID: {id} não existe.");
 
             supplier.Active = false;
 
